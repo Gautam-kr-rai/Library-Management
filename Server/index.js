@@ -1,12 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
+const path = require("path")
 const app = express();
 
 //import middlewares
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
+
+const __dirname= path.resolve()
 //middlewares
 dotenv.config();
 app.use(express.json());
@@ -41,6 +43,16 @@ const { cloudinaryConnect } = require("./config/cloudinary");
 cloudinaryConnect();
 //server
 const PORT = process.env.PORT || 3000;
+
+
+if(process.env.NODE_ENV==="production"){
+  app.use(express.static(path.join(__dirname,"/client/dist")))
+
+  app.get("*", (req, res) => {
+   res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+ });
+}
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
