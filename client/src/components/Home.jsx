@@ -22,7 +22,7 @@ const Home = () => {
           <h1>ARY</h1>
         </div>
 
-        <p className="text-xl font-saira">
+        <p className="text-xl font-serif">
           Dive into our extensive collection of literary treasures. From
           timeless classics to <br />
           Unlock a world of imagination and discovery. From timeless classics to modern masterpieces, our shelves are brimming with stories that inspire, entertain, and enlighten. Whether you crave epic adventures, heartwarming tales, or profound knowledge, our library is the perfect escape for every curious mind.
