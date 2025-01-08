@@ -1,7 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
-const fs = require("fs");
 const app = express();
 
 // Import middlewares
@@ -9,8 +8,10 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
 
-// Middlewares
+// Load environment variables
 dotenv.config();
+
+// Middleware setup
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -26,11 +27,12 @@ app.use(
   })
 );
 
-// Routes
+// Import routes
 const authRoutes = require("./routes/user");
 const bookRoutes = require("./routes/book");
 const transactionRoutes = require("./routes/Transaction");
 
+// Register routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/book", bookRoutes);
 app.use("/api/v1/transaction", transactionRoutes);
@@ -39,25 +41,23 @@ app.use("/api/v1/transaction", transactionRoutes);
 const connectDB = require("./config/db");
 connectDB();
 
-// Cloudinary
+// Cloudinary connection
 const { cloudinaryConnect } = require("./config/cloudinary");
 cloudinaryConnect();
 
-// Serve static files (client/dist)
-const distPath = path.resolve(__dirname, "client", "dist");
+// Define the port
+const PORT = process.env.PORT || 3000;
 
-if (fs.existsSync(distPath)) {
-  app.use(express.static(distPath));
+// Serve static files in production
+if (process.env.NODE_ENV === "development") {
+  app.use(express.static(path.resolve(__dirname, "../client/dist")));
+
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
   });
-} else {
-  console.error("Static files not found. Did you forget to build the client?");
 }
 
-// Server
-const PORT = process.env.PORT || 5000;
-
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
