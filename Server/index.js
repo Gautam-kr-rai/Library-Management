@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
 
-const __dirname= path.resolve()
+// const __dirname= path.resolve()
 //middlewares
 dotenv.config();
 app.use(express.json());
