@@ -53,7 +53,7 @@ const PORT = process.env.PORT || 3000;
 //  });
 // }
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "development") {
   app.use(express.static(path.resolve(__dirname, "client", "dist")));
 
   app.get("*", (req, res) => {

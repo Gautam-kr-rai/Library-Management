@@ -1,7 +1,7 @@
 // const baseURL = `${import.meta.env.VITE_BASE_URL}/api/v1`;
 
 const baseURL =
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV === "development"
     ? "/api/v1"
     : "http://localhost:5000/api/v1";
 export const endpoints = {
