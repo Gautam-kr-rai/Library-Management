@@ -15,31 +15,32 @@ const NavBar = () => {
 
         <Link to={"/"}>
           <button className="hover:text-blue-600">
-            <FaHome />
+            🏡
           </button>
         </Link>
 
         {user && user.role == "Borrower" && (
           <Link to={"/books"} className="hover:text-blue-600">
-            <IoLibrary />
+            📚
           </Link>
         )}
 
         {user && user.role == "Borrower" && (
           <Link to={"/profile"}>
             <button className="hover:text-blue-600">
-              <FaUser />
+              MyBooks📖
             </button>
           </Link>
         )}
         {user && user.role == "Librarian" && (
           <Link to={"/addBook"}>
             <MdOutlineAddCircle />
+
           </Link>
         )}
         {user && user.role == "Librarian" && (
           <Link to={"/allBooks"}>
-            <FaClipboardList />
+            🧾IssuedBook
           </Link>
         )}
       </div>
